@@ -1,0 +1,17 @@
+networks:
+  test_net:
+services:
+  web:
+    networks:
+      - test_net
+    build: .
+    command: fastapi dev main.py --host 0.0.0.0
+    ports:
+      - 8000:8000
+    volumes:
+      - .:/app
+
+  redis:
+    networks:
+      - test_net
+    image: "redis:latest"
